@@ -1,0 +1,24 @@
+name: Hearthstone Deck Tracker
+game_slug: hearthstone-deck-tracker
+version: Installer
+slug: hearthstone-deck-tracker
+runner: wine
+requires: hearthstone
+
+script:
+  files:
+  - hdt-installer: 
+      referer: https://hsreplay.net/
+      filename: HDT-Installer.exe
+      url: https://github.com/HearthSim/HDT-Releases/releases/download/v1.17.12/HDT-Installer.exe
+  game:
+    arch: win32
+    exe: $HOME/AppData/Local/HearthstoneDeckTracker/HearthstoneDeckTracker.exe
+    prefix: $GAMEDIR
+  installer:
+    - task:
+        name: winetricks
+        app: nt4
+    - execute:
+        file: hdt-installer
+        description: Installing Hearthstone Deck Tracker, it will take a while...
